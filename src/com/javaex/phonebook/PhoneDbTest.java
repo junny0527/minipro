@@ -23,13 +23,13 @@ public class PhoneDbTest {
 	}
 
 	private static void run(List<PhoneDb> kbj) {
-		boolean runx = true;
+		boolean value = true;
 		int num = 0;
 		String serchstr = "";
 		System.out.println("***********************************************");
 		System.out.println("*               전화번호 관리 프로그램             *");
 		System.out.println("***********************************************");
-		while (runx) {
+		while (value) {
 			Scanner sc = new Scanner(System.in);
 			System.out.println("1.리스트  2.등록  3.삭제  4.검색  5.종료");
 			System.out.println("-----------------------------------");
@@ -68,7 +68,7 @@ public class PhoneDbTest {
 			System.out.println("*                  감사합니다                   *");
 			System.out.println("***********************************************");
 			sc.close();
-			runx = false;
+			value = false;
 			break;
 
 		default:
@@ -119,7 +119,6 @@ public class PhoneDbTest {
 		System.out.println();
 		wirtTxt(kbj);
 		System.out.println("[등록 완료]");
-		System.out.println("kbj:"+kbj);
 	}
 	//번호 순차대로 다시 넘버링
 	private static void update(List<PhoneDb> kbj) {
@@ -131,30 +130,29 @@ public class PhoneDbTest {
 	}
 	//텍스트 읽어오기
 	private static List<PhoneDb> readTxt(List<PhoneDb> kbj) {
-		Reader re = null;
-		BufferedReader br = null;
-		try {
-			re = new FileReader("C:\\javaStudy\\workspace\\minipro.\\phoneDB.txt");
-			br = new BufferedReader(re);
-			String line = "";
-			String[] person = new String[3];
-			while ((line = br.readLine())  != null) {
-				person = line.split(",");
-				kbj.add(new PhoneDb( person[0], person[1], person[2]));
-			}
-		} catch (Exception e) {
-			e.fillInStackTrace();
-		} finally {
-			try {
-				//br.close();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-		
-		update(kbj);
-		return kbj;
-	}
+	      Reader re = null;
+	      BufferedReader br = null;
+	      try {
+	         re = new FileReader("C:\\javaStudy\\workspace\\minipro.\\phoneDB.txt");
+	         br = new BufferedReader(re);
+	         String line = "";
+	         String[] person = new String[3];
+	         while ((line = br.readLine())  != null) {
+	            person = line.split(",");
+	            kbj.add(new PhoneDb( person[0], person[1], person[2]));
+	         }
+	      } catch (Exception e) {
+	         e.fillInStackTrace();
+	      } finally {
+	         try {
+	            if (br != null) br.close();
+	         } catch (Exception e) {
+	            e.printStackTrace();
+	         }
+	      }
+	      update(kbj);
+	      return kbj;
+	   }
 	//텍스트 쓰기
 	private static void wirtTxt(List<PhoneDb>kbj) {
 		Writer wr = null;
