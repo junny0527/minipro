@@ -13,7 +13,6 @@ public class PhoneDb {
 
 	public PhoneDb( String name, String hp, String company) {
 		super();
-		
 		this.name = name;
 		this.hp = hp;
 		this.company = company;
@@ -52,12 +51,12 @@ public class PhoneDb {
 	}
 
 	public void showInfo() {
-		System.out.printf("%d. %s\t%s\t%s", num, name, hp, company);
+		System.out.printf("%d. %s\t %s\t%s", num, name, hp, company);
 	}
 
 	@Override
 	public String toString() {
-		String result = String.format("%d. %s\t%s\t%s", num, name, hp, company);
+		String result = String.format("%d. %s\t %s\t%s",num, name, hp, company);
 		return result;
 	}
 

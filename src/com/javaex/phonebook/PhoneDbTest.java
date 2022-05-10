@@ -17,7 +17,7 @@ public class PhoneDbTest {
 		List<PhoneDb> kbj = new ArrayList<>();
 		
 		readTxt(kbj);
-		run(kbj);
+		run(kbj); //시작 
 		
 		
 	}
@@ -78,32 +78,14 @@ public class PhoneDbTest {
 
 		}
 	}
-	// 같은 단어 포함 리스트 검색
-	private static void search(List<PhoneDb> kbj, String str) {
-		for (int i = 0; i < kbj.size(); i++) {
-			PhoneDb serch = (PhoneDb) kbj.get(i);
-			if (serch.getName().contains(str)) {
-				System.out.println(serch.toString());
-			}
-		}
-
-	}
-	//선택한 번호 삭제
-	private static void delete(Scanner sc, List<PhoneDb> kbj) {
-		int del = sc.nextInt();
-		kbj.remove(del - 1);
-		update(kbj);
-		System.out.println();
-		wirtTxt(kbj);
-		System.out.println("[삭제 완료]");
-	}
-	//리스트 출력
+	
+		//1.리스트 출력
 	private static void showInfo(List<PhoneDb>kbj) {
 		for(int i = 0; i < kbj.size(); i++){
 			System.out.println(kbj.get(i).toString());
 		}
 	}
-	//리스트 추가
+	//1.리스트 추가
 	private static void add(Scanner sc, List<PhoneDb> kbj) {
 		String name;
 		String hp;
@@ -120,14 +102,44 @@ public class PhoneDbTest {
 		wirtTxt(kbj);
 		System.out.println("[등록 완료]");
 	}
-	//번호 순차대로 다시 넘버링
+	//2.번호 순차대로 다시 넘버링
 	private static void update(List<PhoneDb> kbj) {
 		for (int i = 0; i < kbj.size(); i++) {
 			PhoneDb n = (PhoneDb) kbj.get(i);
-			n.setNum(i + 1);
+			n.setNum(i + 1);//새로운거를 증가해줘야함
 		}
 
-	}
+	}//3.선택한 번호 삭제,삭제할번호가 없으면 삭제하실 번호가 없다는걸 출력
+	private static void delete(Scanner sc, List<PhoneDb> kbj) {
+	      int del = sc.nextInt();
+	      if(del > kbj.size()) {
+	         System.out.println("삭제하실 번호가 없습니다.");
+	      } else {
+	         kbj.remove(del - 1);//빼줘야지 제대로된 값이나옴
+	         update(kbj);
+	         System.out.println();
+	         wirtTxt(kbj);
+	         System.out.println("[삭제 완료]");
+	      }
+	   }
+	// 4.같은 단어 포함 리스트 검색,검색 결과가없으면 검색 결과가 없다는걸 출력
+		private static void search(List<PhoneDb> kbj, String str) {
+			 for(PhoneDb phone : kbj) {
+		         if(phone.getName().contains(str)) {
+		            System.out.println(phone.toString());
+		         } else {
+		            System.out.println("검색결과가 없습니다.");
+		            break;
+		         }
+		      }
+		      for (int i = 0; i < kbj.size(); i++) {
+		         PhoneDb search = (PhoneDb) kbj.get(i);
+		         if (search.getName().contains(str)) {
+		            System.out.println(search.toString());
+		         } 
+		      }
+
+		   }
 	//텍스트 읽어오기
 	private static List<PhoneDb> readTxt(List<PhoneDb> kbj) {
 	      Reader re = null;
